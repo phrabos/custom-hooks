@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import CharacterDetails from '../components/animalCrossing/CharacterDetails';
-import { fetchSingleCharacter } from '../services/apiUtils';
+import { useDetails } from '../hooks/detailsHook';
 
 const DetailsContainer = ({ match }) => {
-  const [loading, setLoading] = useState(true);
-  const [character, setCharacter] = useState(null);
-
-  useEffect(() => {
-    fetchSingleCharacter(match.params.id)
-      .then(setCharacter)
-      .finally(() => setLoading(false));
-  }, []);
+  const { loading, character } = useDetails(match);
 
   if(loading) return <h1>Loading...</h1>;
   return (

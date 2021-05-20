@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import CharacterList from '../components/animalCrossing/CharacterList';
-import { fetchAllCharacters } from '../services/apiUtils';
+import { useCharacters } from '../hooks/animalCrossingHooks';
+// import { fetchAllCharacters } from '../services/apiUtils';
 import style from './main.css';
 
 
 const AnimalCrossingContainer = () => {
-  const [loading, setLoading] = useState(true);
-  const [characters, setCharacters] = useState([]);
-  const [page, setPage] = useState(1);
-
-  useEffect(() => {
-    fetchAllCharacters(page)
-      .then(setCharacters)
-      .finally(() => setLoading(false));
-  }, [page]);
+  const { loading, characters, page, setPage } = useCharacters();
 
   const handleError = (e) => {
     // console.log('image error', name);
